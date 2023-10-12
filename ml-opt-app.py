@@ -120,7 +120,9 @@ def build_model(df):
     grid_reset = grid_contour.reset_index()
     grid_reset.columns = ['max_features', 'n_estimators', 'R2']
     grid_reset = grid_reset.fillna(0)
-    grid_pivot = grid_reset.pivot('max_features', 'n_estimators')
+    grid_reset['max_features'] = grid_reset['max_features'].astype(int)  # Convert to integer if they are not already.
+    grid_reset['n_estimators'] = grid_reset['n_estimators'].astype(int)
+    grid_pivot = grid_reset.pivot_table(index='max_features', columns='n_estimators')
     x = grid_pivot.columns.levels[1].values
     y = grid_pivot.index.values
     z = grid_pivot.values
@@ -170,3 +172,4 @@ else:
         st.write(df.head(5))
 
         build_model(df)
+.
