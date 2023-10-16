@@ -32,7 +32,7 @@ uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["cs
 
 # Sidebar - Specify parameter settings
 st.sidebar.header('Set Parameters')
-split_size = st.sidebar.slider('Data split ratio (% for Training Set)', 0.1, 0.9, 0.8, 0.05)
+split_size = st.sidebar.slider('Data split ratio (% for Training Set)', 10 , 90, 80, 5)
 
 st.sidebar.subheader('Learning Parameters')
 parameter_n_estimators = st.sidebar.slider('Number of estimators (n_estimators)', 0, 500, (10,50), 50)
@@ -81,7 +81,7 @@ def build_model(df):
     st.info(Y.name)
 
     # Data splitting
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, train_size=split_size)
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=(100-split_size)/100))
     
    
     rf = RandomForestRegressor(n_estimators=parameter_n_estimators,
