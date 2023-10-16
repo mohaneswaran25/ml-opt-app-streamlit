@@ -81,7 +81,7 @@ def build_model(df):
     st.info(Y.name)
 
     # Data splitting
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=(100-split_size)/100))
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=(100-split_size)/100)
     
    
     rf = RandomForestRegressor(n_estimators=parameter_n_estimators,
